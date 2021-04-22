@@ -22,24 +22,49 @@ public class Calculator {
        }};
     }
 
-
     @Getter
     private final FormatCode inputFormatCode;
 
     @Getter
     private final int inputBundleNum;
 
+    public TreeMap<Integer, Double> getBundles(FormatCode formatCode) {
+        return priceTable.get(formatCode);
+    }
+
+    public void addBundlesNum(FormatCode formatCode, int bundlesNum, double price) {
+        priceTable.get(formatCode).put(bundlesNum, price);
+    }
+
+    public void deleteBundlesNum(FormatCode formatCode, int bundlesNum) {
+        priceTable.get(formatCode).remove(bundlesNum);
+    }
+
+    public void updateBundlesNum(FormatCode formatCode, int oldBundlesNum, int newBundlesNum) {
+        double value = priceTable.get(formatCode).get(oldBundlesNum);
+        deleteBundlesNum(formatCode, oldBundlesNum);
+        addBundlesNum(formatCode, newBundlesNum, value);
+    }
+
+    public void updateBundlesPrice(FormatCode formatCode, int bundlesNum, double price) {
+        priceTable.put(formatCode, new TreeMap<Integer, Double>() {{
+            put(bundlesNum ,price);
+        }});
+
+    }
+
+
     public String calculate() {
-        TreeMap<Integer, Double> map = priceTable.get(inputFormatCode);
+        TreeMap<Integer, Double> map = getBundles(inputFormatCode);
         int n1 = inputBundleNum /  map.lastKey();
         int n2 = inputBundleNum %  map.lastKey() / map.lowerKey(map.lastKey());
         int n3 = inputBundleNum %  map.lastKey() % map.lowerKey(map.lastKey()) / map.firstKey() > 0
                 ? inputBundleNum %  map.lastKey() % map.lowerKey(map.lastKey()) / map.firstKey() + 1
                 : inputBundleNum %  map.lastKey() % map.lowerKey(map.lastKey()) / map.firstKey();
 
-        double sum = n1 * priceTable.get(inputFormatCode).get(map.lastKey()) +
-                     n2 * priceTable.get(inputFormatCode).get(map.lowerKey(map.lastKey())) +
-                     n3 * priceTable.get(inputFormatCode).get(map.firstKey());
+        double sum = n1 * getBundles(inputFormatCode).get(map.lastKey()) +
+                     n2 * getBundles(inputFormatCode).get(map.lowerKey(map.lastKey())) +
+                     n3 * getBundles(inputFormatCode).get(map.firstKey());
 
         return String.format("%d %s $%.2f \n", inputBundleNum, inputFormatCode, sum );
     }
