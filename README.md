@@ -5,7 +5,7 @@
 
 ### This is the Picocli based Command line interface. It supports the below functions:
 
-* Calculate the total amount by input sigle line args in shell
+* Calculate the total amount by input single line args in shell
 * Calculate the total amount by input multiple lines args by file
 
 ## How to run this application
