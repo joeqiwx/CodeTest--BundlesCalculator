@@ -8,20 +8,20 @@ import java.util.stream.Collectors;
         showAtFileInUsageHelp = true)
 public class BundleCalculator implements Runnable {
 
-    static class Bundles {
+    static class Order {
         @CommandLine.Parameters( index = "0", description = "The number of items")
-        int bundlesNum;
+        int orderNum;
         @CommandLine.Parameters( index = "1", description = "FormatCode: ${COMPLETION-CANDIDATES}")
-        FormatCode formatCode;
+        FormatCode orderItem;
     }
 
     @CommandLine.ArgGroup(exclusive = false, multiplicity = "1..*")
-    List<Bundles> bundlesList;
+    List<Order> orderList;
 
     @Override
     public void run() {
-        bundlesList.stream()
-                   .map(e -> Calculator.input(e.formatCode, e.bundlesNum).calculate())
+        orderList.stream()
+                   .map(e -> Service.input(e.orderItem, e.orderNum).toString())
                    .collect(Collectors.toList())
                    .forEach(log::info);
     }
