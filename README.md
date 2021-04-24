@@ -15,10 +15,28 @@
 * Run the command to start the application: **java -jar build/libs/BundlesCalculator-1.0-SNAPSHOT.jar `<bundlesNum> <formatCode>`**
 * Or the command **java -jar build/libs/BundlesCalculator-1.0-SNAPSHOT.jar @filePath**
 ```console
-Usage: BundleCalculator (<bundlesNum> <formatCode>)... [@<filename>...]
+$ java -jar build/libs/BundlesCalculator-1.0-SNAPSHOT.jar
+Error: Missing required argument(s): (<orderNum> <orderItem>)
+Usage: BundleCalculator (<orderNum> <orderItem>)... [@<filename>...]
       [@<filename>...]   One or more argument files containing options.
-      <bundlesNum>       The number of items
-      <formatCode>       FormatCode: IMG, FLAC, VID
-
+      <orderNum>         The number of items
+      <orderItem>        FormatCode: IMG, FLAC, VID
 ```
 
+```console
+$ java -jar build/libs/BundlesCalculator-1.0-SNAPSHOT.jar 13 VID
+Apr 24, 2021 6:22:44 PM java.util.ArrayList forEach
+INFO: 13 VID $2370.00
+```
+
+```console
+$ java -jar build/libs/BundlesCalculator-1.0-SNAPSHOT.jar @/home/weixin/a.txt
+Apr 24, 2021 6:24:09 PM java.util.ArrayList forEach
+INFO: 10 IMG $800.00
+
+Apr 24, 2021 6:24:09 PM java.util.ArrayList forEach
+INFO: 15 FLAC $1957.50
+
+Apr 24, 2021 6:24:09 PM java.util.ArrayList forEach
+INFO: 13 VID $2370.00
+```
