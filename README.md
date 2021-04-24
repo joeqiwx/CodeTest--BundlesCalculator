@@ -28,6 +28,12 @@ $ java -jar build/libs/BundlesCalculator-1.0-SNAPSHOT.jar 13 VID
 Apr 24, 2021 6:22:44 PM java.util.ArrayList forEach
 INFO: 13 VID $2370.00
 ```
+```console
+$ cat a.txt
+10 IMG
+15 FLAC
+13 VID
+```
 
 ```console
 $ java -jar build/libs/BundlesCalculator-1.0-SNAPSHOT.jar @/home/weixin/a.txt
